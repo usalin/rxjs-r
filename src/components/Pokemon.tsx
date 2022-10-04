@@ -1,6 +1,6 @@
 const Pokemon = () => {
    return(
-      <h1>Single Pokemon</h1>
+      <h1>Single Pokemon YoyoYOyo</h1>
    )
 };
 
