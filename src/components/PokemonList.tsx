@@ -14,6 +14,7 @@ const PokemonList = () => {
       .subscribe((data: PokemonListLimitedResult[]) => {
          setData(data)
       });
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    return (
