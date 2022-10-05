@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import { PokemonListLimitedResult } from "../models/pokemon-list-models";
 import '../styles/pokemon.scss';
+import { capitalize } from "../utility";
+
 interface Props {
    pokemon: PokemonListLimitedResult;
 }
 
 const PokemonCard = ({ pokemon }: Props) => {
-
-   function capitalize(text: string) {
-      return text.charAt(0).toUpperCase() + text.slice(1);
-   }
-
    return (
       <div className="card-container">
          <div className="img-container">
@@ -24,7 +21,6 @@ const PokemonCard = ({ pokemon }: Props) => {
          <div className="type-container">
             {capitalize(pokemon.type)}
          </div>
-
       </div>
    )
 }

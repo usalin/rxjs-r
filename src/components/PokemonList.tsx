@@ -1,43 +1,20 @@
 import { useEffect, useState } from "react";
-import { forkJoin, Observable } from "rxjs";
-import { fromFetch } from 'rxjs/fetch';
-import { map, mergeMap } from "rxjs/operators";
-import { IndividulPokemonGeneralResult, PokemonListLimitedResult, PokemonListResult, Result } from "../models/pokemon-list-models";
+import { Subject, takeUntil } from "rxjs";
+import agent from "../agent";
+import {  PokemonListLimitedResult } from "../models/pokemon-list-models";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = () => {
    const [limitedListData, setData] = useState<PokemonListLimitedResult[]>();
+   const destroy$ = new Subject();
 
    useEffect(() => {
-      fromFetch<PokemonListResult>('https://pokeapi.co/api/v2/pokemon', {
-         selector: response => response.json()
-      }).pipe(
-         map((listResult: PokemonListResult) => listResult.results),
-         mergeMap((results: Result[]) =>
-            forkJoin(results.map((result) => getPokemonByUrl(result.url)))
-         )
-      ).subscribe((data: PokemonListLimitedResult[]) => {
+       agent.Pokemon.getPokemonListResults
+      .pipe(takeUntil(destroy$))
+      .subscribe((data: PokemonListLimitedResult[]) => {
          setData(data)
       });
    }, []);
-
-   /**
-    * Get Pokemon By ID 
-    * */
-   function getPokemonByUrl(url: string): Observable<PokemonListLimitedResult> {
-      return fromFetch<IndividulPokemonGeneralResult>(url,
-         { selector: response => response.json() }
-      ).pipe(
-         map((data: IndividulPokemonGeneralResult) => {
-            const imageUrl = data.sprites.front_default;
-            const id = data.id;
-            const type = data.types[0].type.name;
-            const name = data.name;
-
-            return { id, name, type, imageUrl };
-         })
-      );
-   }
 
    return (
       <div>
@@ -54,6 +31,5 @@ const PokemonList = () => {
       </div>
    )
 };
-
 
 export default PokemonList;
