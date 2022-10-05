@@ -12,49 +12,11 @@ export interface EggGroup {
    url: string;
 }
 
-export interface EvolutionChain {
-   url: string;
-}
-
-export interface EvolvesFromSpecies {
-   name: string;
-   url: string;
-}
-
-export interface Language {
-   name: string;
-   url: string;
-}
-
-export interface Version {
-   name: string;
-   url: string;
-}
-
 export interface FlavorTextEntry {
    flavor_text: string;
-   language: Language;
-   version: Version;
 }
-
-export interface Language2 {
-   name: string;
-   url: string;
-}
-
 export interface Genera {
    genus: string;
-   language: Language2;
-}
-
-export interface Generation {
-   name: string;
-   url: string;
-}
-
-export interface GrowthRate {
-   name: string;
-   url: string;
 }
 
 export interface Habitat {
@@ -62,25 +24,13 @@ export interface Habitat {
    url: string;
 }
 
-export interface Language3 {
-   name: string;
-   url: string;
-}
-
 export interface Name {
-   language: Language3;
    name: string;
 }
 
 export interface Area {
    name: string;
    url: string;
-}
-
-export interface PalParkEncounter {
-   area: Area;
-   base_score: number;
-   rate: number;
 }
 
 export interface Pokedex {
@@ -103,25 +53,16 @@ export interface Pokemon {
    url: string;
 }
 
-export interface Variety {
-   is_default: boolean;
-   pokemon: Pokemon;
-}
-
 export interface PokemonSpeciesResult {
    base_happiness: number;
    capture_rate: number;
    color: Color;
    egg_groups: EggGroup[];
-   evolution_chain: EvolutionChain;
-   evolves_from_species: EvolvesFromSpecies;
    flavor_text_entries: FlavorTextEntry[];
    form_descriptions: any[];
    forms_switchable: boolean;
    gender_rate: number;
    genera: Genera[];
-   generation: Generation;
-   growth_rate: GrowthRate;
    habitat: Habitat;
    has_gender_differences: boolean;
    hatch_counter: number;
@@ -132,10 +73,8 @@ export interface PokemonSpeciesResult {
    name: string;
    names: Name[];
    order: number;
-   pal_park_encounters: PalParkEncounter[];
    pokedex_numbers: PokedexNumber[];
    shape: Shape;
-   varieties: Variety[];
 }
 
 export interface PokemonDetailedDisplayInfoInterface {

@@ -41,7 +41,9 @@ const PokemonList = () => {
 
    return (
       <div>
-         <header>Pokemon List</header>
+         <header>
+            <h1>Pokemon List</h1>
+         </header>
          <div className="list-container">
             {
                limitedListData?.map(pokemon => (
