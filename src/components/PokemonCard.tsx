@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PokemonListLimitedResult } from "../models/pokemon-list";
+import { PokemonListLimitedResult } from "../models/pokemon-list-models";
 
 interface Props {
    pokemon: PokemonListLimitedResult;

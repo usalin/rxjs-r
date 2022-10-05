@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { forkJoin, Observable, of } from "rxjs";
+import { forkJoin, Observable } from "rxjs";
 import { fromFetch } from 'rxjs/fetch';
 import { map, mergeMap } from "rxjs/operators";
-import { IndividulPokemonGeneralResult, PokemonListLimitedResult, PokemonListResult, Result } from "../models/pokemon-list";
+import { IndividulPokemonGeneralResult, PokemonListLimitedResult, PokemonListResult, Result } from "../models/pokemon-list-models";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = () => {
@@ -22,6 +21,9 @@ const PokemonList = () => {
       });
    }, []);
 
+   /**
+    * Get Pokemon By ID 
+    * */
    function getPokemonByUrl(url: string): Observable<PokemonListLimitedResult> {
       return fromFetch<IndividulPokemonGeneralResult>(url,
          { selector: response => response.json() }
