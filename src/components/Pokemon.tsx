@@ -3,24 +3,24 @@ import { Link, useParams } from "react-router-dom";
 import { PokemonDetailedDisplayInfoInterface, PokemonSpeciesResultInterface } from "../models/pokemon-models";
 import { capitalize } from "../utility";
 import agent from "../agent";
-import { Subject, takeUntil } from "rxjs";
 
 const Pokemon = () => {
    const { id } = useParams<{ id: string }>();
    const [pokemon, setPokemon] = useState<PokemonDetailedDisplayInfoInterface>();
    const [species, setSpecies] = useState<PokemonSpeciesResultInterface>();
-   const destroy$ = new Subject();
 
    useEffect(() => {
-      agent.Pokemon.getPokemonDetailedById(id!)
-         .pipe(takeUntil(destroy$))
+     const subscription = agent.Pokemon.getPokemonDetailedById(id!)
          .subscribe(
             (data: [PokemonDetailedDisplayInfoInterface, PokemonSpeciesResultInterface]) => {
                setPokemon(data[0]);
                setSpecies(data[1]);
             }
          );
-   });
+         return () => {
+            subscription.unsubscribe();
+         }
+   }, []);
 
    return (
       <div className="detail-container">

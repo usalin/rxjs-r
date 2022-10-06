@@ -5,7 +5,7 @@ import { PokemonDetailedDisplayInfoInterface, PokemonSpeciesResult } from "./mod
 
 const Pokemon = {
    getPokemonListResults:
-      fromFetch<PokemonListResult>('https://pokeapi.co/api/v2/pokemon', {
+      fromFetch<PokemonListResult>('https://pokeapi.co/api/v2/pokemon?offset=50/', {
          selector: response => response.json()
       }).pipe(
          map((listResult: PokemonListResult) => listResult.results),
